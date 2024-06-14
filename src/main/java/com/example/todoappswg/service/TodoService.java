@@ -38,4 +38,17 @@ public class TodoService {
 		toDos.removeIf(todo -> todo.getId().equals(id));
 
 	}
+
+	public Todo updateTodo(Long id, Todo todo) {
+		//toDosリスト内for文
+		//equals(id)現在のtoのIDを取得・取得したIDと指定されたIDの比較
+		for (int i = 0; i < toDos.size(); i++) {
+			Todo to = toDos.get(i);
+			if (to.getId().equals(id)) {
+				toDos.set(i, todo);
+				return todo;
+			}
+		}
+		return null;
+	}
 }

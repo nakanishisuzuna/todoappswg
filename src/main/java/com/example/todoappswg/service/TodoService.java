@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,10 @@ public class TodoService {
 		return toDos;
 	}
 
+	private AtomicLong idCounter = new AtomicLong(); // 次に使用するIDを管理
+
 	public Todo addTodo(Todo todo) {
+		todo.setId(idCounter.getAndIncrement()); // IDを自動的に設定
 		toDos.add(todo);
 		return todo;
 	}

@@ -1,21 +1,21 @@
 package com.example.todoappswg.model;
 
 public class Todo {
-	//Todoクラスのインスタンスが持つ5つの属性（フィールド）を定義
+	//Todoクラスのインスタンスが持つ４つの属性（フィールド）を定義
 	private Long id;
 	private String title;
 	private String status;
-	private long createdAt;//作成タイムスタンプ
-	private long updatedAt;//更新タイムスタンプ
+	private String details;
 
 	public Todo() {
 	}
 
-	public Todo(Long id, String title, String status) {
+	public Todo(Long id, String title, String status, String details) {
 
 		this.id = id;
 		this.title = title;
 		this.status = status;
+		this.details = details;
 	}
 
 	public Long getId() {
@@ -42,20 +42,12 @@ public class Todo {
 		this.status = status;
 	}
 
-	public long getCreatedAt() {
-		return createdAt;
+	public String getDetails() {
+		return details;
 	}
 
-	public void setCreatedAt(long createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public long getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(long updatedAt) {
-		this.updatedAt = updatedAt;
+	public void setDetails(String details) {
+		this.details = details;
 	}
 
 }

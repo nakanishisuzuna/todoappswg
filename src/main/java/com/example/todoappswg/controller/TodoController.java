@@ -3,6 +3,8 @@ package com.example.todoappswg.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.todoappswg.model.Todo;
@@ -21,6 +23,11 @@ public class TodoController {
 	@GetMapping("/todos")
 	public List<Todo> toDos() {
 		return todoService.toDos();
+	}
+
+	@PostMapping("/todos")
+	public Todo addTodo(@RequestBody Todo todo) {
+		return todoService.addTodo(todo);
 	}
 
 }

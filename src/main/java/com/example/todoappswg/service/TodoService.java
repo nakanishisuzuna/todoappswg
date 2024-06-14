@@ -16,7 +16,10 @@ public class TodoService {
 					new Todo(3l, "タスクC", "未着手", "詳細C")));
 
 	public List<Todo> toDos() {
-		// TODO 自動生成されたメソッド・スタブ
 		return toDos;
+	}
+
+	public Todo addTodo(Todo todo) {
+		return todo;
 	}
 }

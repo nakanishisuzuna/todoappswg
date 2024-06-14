@@ -33,4 +33,9 @@ public class TodoService {
 	public Optional<Todo> getTodoById(Long id) {
 		return toDos.stream().filter(todo -> todo.getId().equals(id)).findFirst();
 	}
+
+	public void deleteTodoById(Long id) {
+		toDos.removeIf(todo -> todo.getId().equals(id));
+
+	}
 }

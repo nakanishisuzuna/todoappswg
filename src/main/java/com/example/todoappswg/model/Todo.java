@@ -50,6 +50,10 @@ public class Todo {
 		this.details = details;
 	}
 
+	public void remove() {
+
+	}
+
 }
 
 //ToDoアプリケーションで使用する「ToDo」オブジェクトを定義

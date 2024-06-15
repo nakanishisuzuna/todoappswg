@@ -18,6 +18,7 @@ public class TodoService {
 					new Todo(3l, "タスクC", "未着手", "詳細C")));
 
 	//idCounter を最大 ID + 1 で初期化
+	//map:Todoオブジェクト内のid分野
 	public TodoService() {
 		long maxId = toDos.stream().mapToLong(Todo::getId).max().orElse(0L);
 		idCounter = new AtomicLong(maxId + 1);
@@ -41,11 +42,31 @@ public class TodoService {
 	//equals(id)現在のtodoのIDを取得・取得したIDと指定されたIDの比較
 	//.findFirst()フィルタリングされたストリームの中から最初の要素を返す
 	public Optional<Todo> getTodoById(Long id) {
-		return toDos.stream().filter(todo -> todo.getId().equals(id)).findFirst();
+		//toDosリスト内for文
+		//equals(id)現在のtoのIDを取得・取得したIDと指定されたIDの比較
+		for (int i = 0; i < toDos.size(); i++) {
+			Todo to = toDos.get(i);
+			if (toDos.get(i).getId().equals(id)) {
+				return Optional.of(toDos.get(i));
+			}
+		}
+		return null;
+		//return toDos.stream().filter(todo -> todo.getId().equals(id)).findFirst();
 	}
 
-	public void deleteTodoById(Long id) {
-		toDos.removeIf(todo -> todo.getId().equals(id));
+	public Optional<Todo> deleteTodoById(Long id) {
+		//toDosリスト内for文
+		//equals(id)現在のtoのIDを取得・取得したIDと指定されたIDの比較
+		Optional<Todo> todoDelete = Optional.empty();
+		for (Todo todo : toDos) {
+			if (todo.getId().equals(id)) {
+				todoDelete = Optional.of(todo);
+				todo.remove();
+				break;
+			}
+		}
+		//toDos.removeIf(todo -> todo.getId().equals(id));
+		return null;
 
 	}
 

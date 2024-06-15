@@ -17,6 +17,12 @@ public class TodoService {
 			Arrays.asList(new Todo(1l, "タスクA", "未着手", "詳細A"), new Todo(2l, "タスクB", "未着手", "詳細B"),
 					new Todo(3l, "タスクC", "未着手", "詳細C")));
 
+	//idCounter を最大 ID + 1 で初期化
+	public TodoService() {
+		long maxId = toDos.stream().mapToLong(Todo::getId).max().orElse(0L);
+		idCounter = new AtomicLong(maxId + 1);
+	}
+
 	public List<Todo> getAllTodos() {
 		return toDos;
 	}
@@ -49,6 +55,7 @@ public class TodoService {
 		for (int i = 0; i < toDos.size(); i++) {
 			Todo to = toDos.get(i);
 			if (to.getId().equals(id)) {
+				todo.setId(id);//元のIDを保存しておく
 				toDos.set(i, todo);
 				return todo;
 			}

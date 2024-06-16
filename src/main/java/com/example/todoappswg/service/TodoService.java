@@ -56,13 +56,11 @@ public class TodoService {
 	public Optional<Todo> deleteTodoById(Long id) {
 		//toDosリスト内for文
 		//equals(id)現在のtoのIDを取得・取得したIDと指定されたIDの比較
-		Optional<Todo> todoDelete = getTodoById(id);
-		if (todoDelete.isPresent()) {
-			for (int i = 0; i < toDos.size(); i++) {
-				if (toDos.get(i).getId().equals(id)) {
-					toDos.remove(i);
-					return Optional.of(todoDelete.get());
-				}
+		//Optional<Todo> todoDelete = getTodoById(id);
+		for (int i = 0; i < toDos.size(); i++) {
+			if (toDos.get(i).getId().equals(id)) {
+				toDos.remove(i);
+				return Optional.empty();
 			}
 		}
 		//toDos.removeIf(todo -> todo.getId().equals(id));

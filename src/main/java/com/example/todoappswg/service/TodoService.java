@@ -2,13 +2,13 @@ package com.example.todoappswg.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.todoappswg.mapper.TodoMapper;
 import com.example.todoappswg.model.Todo;
+import com.example.todoappswg.model.TodoWithoutId;
 
 @Service
 public class TodoService {
@@ -31,12 +31,12 @@ public class TodoService {
 		return todoMapper.getAllTodos();
 	}
 
-	private AtomicLong idCounter = new AtomicLong(); // 次に使用するIDを管理
+	//private AtomicLong idCounter = new AtomicLong(); // 次に使用するIDを管理
 
-	public Todo addTodo(Todo todo) {
-		todo.setId(idCounter.getAndIncrement()); // IDを自動的に設定
-		todoMapper.addTodo(todo);
-		return todo;
+	public TodoWithoutId addTodo(TodoWithoutId todoWithoutId) {
+		//todoWithoutId.setId(idCounter.getAndIncrement()); // IDを自動的に設定
+		todoMapper.addTodo(todoWithoutId);
+		return todoWithoutId;
 	}
 
 	//toDosリスト

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 
 import com.example.todoappswg.model.Todo;
+import com.example.todoappswg.model.TodoWithoutId;
 
 @Mapper
 public interface TodoMapper {
@@ -16,7 +17,7 @@ public interface TodoMapper {
     Optional<Todo> getTodoById(Long id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    void addTodo(Todo todo);
+    void addTodo(TodoWithoutId todoWithoutId);
 
     void updateTodo(Todo todo);
 

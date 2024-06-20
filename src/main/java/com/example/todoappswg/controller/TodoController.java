@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.todoappswg.model.Todo;
+import com.example.todoappswg.model.TodoWithoutId;
 import com.example.todoappswg.service.TodoService;
 
 @RestController
@@ -32,8 +33,8 @@ public class TodoController {
 	}
 
 	@PostMapping("/todos")
-	public Todo addTodo(@RequestBody Todo todo) {
-		return todoService.addTodo(todo);
+	public TodoWithoutId addTodo(@RequestBody TodoWithoutId todoWithoutId) {
+		return todoService.addTodo(todoWithoutId);
 	}
 
 	//idのTodo一覧を取得

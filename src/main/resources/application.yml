@@ -13,4 +13,4 @@ server:
   
 mybatis:
   configuration:
-    map-underscore-to-camel-case: true  
+    map-underscore-to-camel-case: true   

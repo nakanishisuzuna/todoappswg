@@ -10,7 +10,7 @@
         SELECT * FROM todo WHERE id = #{id}
     </select>
 
-    <insert id="addTodo" useGeneratedKeys="true" keyProperty="id">
+    <insert id="addTodo" parameterType="com.example.todoappswg.model.TodoWithoutId">
         INSERT INTO todo (title, status, details) VALUES (#{title}, #{status}, #{details})
     </insert>
 

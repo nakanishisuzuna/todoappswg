@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.todoappswg.mapper.TodoMapper">
+    <resultMap id="TodoResultMap" type="com.example.todoappswg.model.Todo">
+        <id property="id" column="id" />
+        <result property="title" column="title" />
+        <result property="status" column="status" />
+        <result property="details" column="details" />
+    </resultMap>
+
+    <select id="getAllTodos" resultMap="TodoResultMap">
+        SELECT * FROM todo
+    </select>
+
+    <select id="getTodoById" resultMap="TodoResultMap">
+        SELECT * FROM todo WHERE id = #{id}
+    </select>
+
+    <insert id="addTodo" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO todo (title, status, details) VALUES (#{title}, #{status}, #{details})
+    </insert>
+
+    <update id="updateTodo">
+        UPDATE todo SET title = #{title}, status = #{status}, details = #{details} WHERE id = #{id}
+    </update>
+
+    <delete id="deleteTodoById">
+        DELETE FROM todo WHERE id = #{id}
+    </delete>
+</mapper>

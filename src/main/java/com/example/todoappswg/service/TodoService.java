@@ -59,8 +59,8 @@ public class TodoService {
 		//Optional<Todo> todoDelete = getTodoById(id);
 		for (int i = 0; i < toDos.size(); i++) {
 			if (toDos.get(i).getId().equals(id)) {
-				toDos.remove(i);
-				return Optional.empty();
+				Todo removedTodo=toDos.remove(i);
+				return Optional.of(removedTodo);
 			}
 		}
 		//toDos.removeIf(todo -> todo.getId().equals(id));

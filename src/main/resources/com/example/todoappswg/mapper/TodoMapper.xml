@@ -14,8 +14,9 @@
         INSERT INTO todo (title, status, details) VALUES (#{title}, #{status}, #{details})
     </insert>
 
-    <update id="updateTodo">
-        UPDATE todo SET title = #{title}, status = #{status}, details = #{details} WHERE id = #{id}
+    <update id="updateTodo" parameterType="com.example.todoappswg.model.TodoWithoutId">
+        UPDATE todo SET title = #{title}, status = #{status}, details = #{details} 
+        
     </update>
 
     <delete id="deleteTodoById">

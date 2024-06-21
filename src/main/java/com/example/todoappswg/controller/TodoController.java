@@ -50,8 +50,8 @@ public class TodoController {
 	}
 
 	@PutMapping("/todos/{id}")
-	public Todo updateTodo(@PathVariable Long id, @RequestBody Todo todo) {
-		return todoService.updateTodo(id, todo);
+	public TodoWithoutId updateTodo(@PathVariable Long id,@RequestBody TodoWithoutId todoWithoutId) {
+		return todoService.updateTodo(id, todoWithoutId);
 	}
 
 }

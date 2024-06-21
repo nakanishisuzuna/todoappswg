@@ -17,7 +17,7 @@ public interface TodoMapper {
 
     void addTodo(TodoWithoutId todoWithoutId);
 
-    void updateTodo(Todo todo);
+    void updateTodo(TodoWithoutId todoWithoutId);
 
     void deleteTodoById(Long id);
 }

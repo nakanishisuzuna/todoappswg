@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.example.todoappswg.model.Todo;
 import com.example.todoappswg.model.TodoWithoutId;
@@ -17,7 +18,14 @@ public interface TodoMapper {
 
     void addTodo(TodoWithoutId todoWithoutId);
 
-    void updateTodo(TodoWithoutId todoWithoutId);
+    void updateTodo(Todo todo);
 
     void deleteTodoById(Long id);
+    
+    List<Todo> getTodosByStatus(String status);
+    
+    List<Todo> getTodosByTitle(String title);
+    
+    List<Todo> getTodosByStatusAndTitle(@Param("status") String status, @Param("title") String title);
+
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.todoappswg.model.Todo;
@@ -50,8 +51,23 @@ public class TodoController {
 	}
 
 	@PutMapping("/todos/{id}")
-	public TodoWithoutId updateTodo(@PathVariable Long id,@RequestBody TodoWithoutId todoWithoutId) {
-		return todoService.updateTodo(id, todoWithoutId);
+	public Todo updateTodoById(@PathVariable Long id,@RequestBody Todo todo) {
+		return todoService.updateTodo(id, todo);
 	}
+	
+	@GetMapping("/todos/filter")
+    public List<Todo> filterTodos(@RequestParam(required = false) String status,
+                                  @RequestParam(required = false) String title) {
+        if (status != null && title != null) {
+            return todoService.getTodosByStatusAndTitle(status, title);
+        } else if (status != null) {
+            return todoService.getTodosByStatus(status);
+        } else if (title != null) {
+            return todoService.getTodosByTitle(title);
+        } else {
+            return todoService.getAllTodos();
+        }
+    }
+
 
 }

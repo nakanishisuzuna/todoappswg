@@ -10,12 +10,12 @@
         SELECT * FROM todo WHERE id = #{id}
     </select>
 
-    <insert id="addTodo" parameterType="com.example.todoappswg.model.TodoWithoutId">
-        INSERT INTO todo (title, status, details) VALUES (#{title}, #{status}, #{details})
+    <insert id="addTodo" parameterType="com.example.todoappswg.model.Todo">
+        INSERT INTO todo (title, status, details) VALUES (#{title}, #{status}, #{details}) 
     </insert>
 
-    <update id="updateTodo" parameterType="com.example.todoappswg.model.TodoWithoutId">
-        UPDATE todo SET title = #{title}, status = #{status}, details = #{details} 
+    <update id="updateTodo" parameterType="com.example.todoappswg.model.Todo">
+        UPDATE todo SET title = #{title}, status = #{status}, details = #{details} WHERE id = #{id}
         
     </update>
 

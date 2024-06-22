@@ -70,18 +70,32 @@ public class TodoService {
 
 	}
 
-	public TodoWithoutId updateTodo(Long id, TodoWithoutId todoWithoutId) {
+	public Todo updateTodo(Long id, Todo todo) {
 		//toDosリスト内for文
 		//equals(id)現在のtoのIDを取得・取得したIDと指定されたIDの比較
 		//for (int i = 0; i < toDos.size(); i++) {
 			//Todo to = toDos.get(i);
 			if (todoMapper.getTodoById(id).isPresent()) {
-				//todoWithoutId.setId(id);//元のIDを保存しておく
-				todoMapper.updateTodo(todoWithoutId);
+				todo.setId(id);//元のIDを保存しておく
+				
+				todoMapper.updateTodo(todo);
 				//toDos.set(i, todo);
-				return todoWithoutId;
+				return todo;
 			}
 		//}
 		return null;
 	}
+	
+	public List<Todo> getTodosByStatus(String status) {
+        return todoMapper.getTodosByStatus(status);
+    }
+
+    public List<Todo> getTodosByTitle(String title) {
+        return todoMapper.getTodosByTitle(title);
+    }
+
+    public List<Todo> getTodosByStatusAndTitle(String status, String title) {
+        return todoMapper.getTodosByStatusAndTitle(status, title);
+    }
+
 }

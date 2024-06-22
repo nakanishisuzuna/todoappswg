@@ -17,4 +17,7 @@ public TodoWithoutId(String title, String status, String details) {
 	this.status = status;
 	this.details = details;
 }
+
+public void setId(Long id) {
+}
 }

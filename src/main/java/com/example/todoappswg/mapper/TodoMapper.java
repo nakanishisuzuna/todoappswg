@@ -11,13 +11,15 @@ import com.example.todoappswg.model.TodoWithoutId;
 @Mapper
 public interface TodoMapper {
 
-    List<Todo> getAllTodos();
+	List<Todo> getAllTodos();
 
-    Optional<Todo> getTodoById(Long id);
+	Optional<Todo> getTodoById(Long id);
 
-    void addTodo(TodoWithoutId todoWithoutId);
+	void addTodo(TodoWithoutId todoWithoutId);
 
-    void updateTodo(Todo todo);
+	void addTodo(Todo todoWithoutId);
 
-    void deleteTodoById(Long id);
+	void updateTodo(Todo todo);
+
+	void deleteTodoById(Long id);
 }

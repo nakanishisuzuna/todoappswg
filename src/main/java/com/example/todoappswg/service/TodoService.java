@@ -16,16 +16,16 @@ public class TodoService {
 	/*private List<Todo> toDos = new ArrayList<>(
 			Arrays.asList(new Todo(1l, "タスクA", "未着手", "詳細A"), new Todo(2l, "タスクB", "未着手", "詳細B"),
 					new Todo(3l, "タスクC", "未着手", "詳細C")));
-
+	
 	//idCounter を最大 ID + 1 で初期化
 	//map:Todoオブジェクト内のid分野
 	public TodoService() {
 		long maxId = toDos.stream().mapToLong(Todo::getId).max().orElse(0L);
 		idCounter = new AtomicLong(maxId + 1);
 	}*/
-	
+
 	@Autowired
-    private TodoMapper todoMapper;
+	private TodoMapper todoMapper;
 
 	public List<Todo> getAllTodos() {
 		return todoMapper.getAllTodos();
@@ -39,6 +39,12 @@ public class TodoService {
 		return todoWithoutId;
 	}
 
+	public Todo addTodo(Todo todo) {
+		//todoWithoutId.setId(idCounter.getAndIncrement()); // IDを自動的に設定
+		todoMapper.addTodo(todo);
+		return todo;
+	}
+
 	//toDosリスト
 	//filter()ストリームの中から条件に一致する要素だけを残す
 	//ラムダ式(->)todoオブジェクトのgetIdメソッドを呼び出す
@@ -47,7 +53,7 @@ public class TodoService {
 	public Optional<Todo> getTodoById(Long id) {
 		//toDosリスト内for文
 		//equals(id)現在のtoのIDを取得・取得したIDと指定されたIDの比較
-				return todoMapper.getTodoById(id);
+		return todoMapper.getTodoById(id);
 
 		//return null;
 		//return toDos.stream().filter(todo -> todo.getId().equals(id)).findFirst();
@@ -58,12 +64,12 @@ public class TodoService {
 		//equals(id)現在のtoのIDを取得・取得したIDと指定されたIDの比較
 		Optional<Todo> todoDelete = todoMapper.getTodoById(id);
 		//for (int i = 0; i < toDos.size(); i++) {
-			if (todoDelete.isPresent()) {
-				//Todo removedTodo=toDos.remove(i);
-				//return Optional.of(removedTodo);
-				todoMapper.deleteTodoById(id);
-			}
-			return todoDelete;
+		if (todoDelete.isPresent()) {
+			//Todo removedTodo=toDos.remove(i);
+			//return Optional.of(removedTodo);
+			todoMapper.deleteTodoById(id);
+		}
+		return todoDelete;
 		//}
 		//toDos.removeIf(todo -> todo.getId().equals(id));
 		//return null;
@@ -74,13 +80,13 @@ public class TodoService {
 		//toDosリスト内for文
 		//equals(id)現在のtoのIDを取得・取得したIDと指定されたIDの比較
 		//for (int i = 0; i < toDos.size(); i++) {
-			//Todo to = toDos.get(i);
-			if (todoMapper.getTodoById(id).isPresent()) {
-				todo.setId(id);//元のIDを保存しておく
-				todoMapper.updateTodo(todo);
-				//toDos.set(i, todo);
-				return todo;
-			}
+		//Todo to = toDos.get(i);
+		if (todoMapper.getTodoById(id).isPresent()) {
+			todo.setId(id);//元のIDを保存しておく
+			todoMapper.updateTodo(todo);
+			//toDos.set(i, todo);
+			return todo;
+		}
 		//}
 		return null;
 	}

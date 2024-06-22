@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/todo
-    username: app
-    password: app
+    username: root
+    password: NOTTORI5817wwms
 
   sql:
     init:

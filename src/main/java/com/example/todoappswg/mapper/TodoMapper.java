@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.example.todoappswg.model.Todo;
 import com.example.todoappswg.model.TodoWithoutId;
@@ -20,6 +21,8 @@ public interface TodoMapper {
 	void addTodo(Todo todoWithoutId);
 
 	void updateTodo(Todo todo);
+
+	void updateTodoNew(@Param("id") Long id, @Param("todo") Todo todo);
 
 	void deleteTodoById(Long id);
 }

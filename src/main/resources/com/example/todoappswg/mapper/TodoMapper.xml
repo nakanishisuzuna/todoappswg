@@ -17,6 +17,11 @@
     <update id="updateTodo">
         UPDATE todo SET title = #{title}, status = #{status}, details = #{details} WHERE id = #{id}
     </update>
+    
+        
+    <update id="updateTodoNew" parameterType="map">
+        UPDATE todo SET title = #{todo.title}, status = #{todo.status}, details = #{todo.details} WHERE id = #{id}
+    </update>
 
     <delete id="deleteTodoById">
         DELETE FROM todo WHERE id = #{id}

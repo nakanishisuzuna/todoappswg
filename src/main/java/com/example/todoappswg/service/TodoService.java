@@ -90,4 +90,8 @@ public class TodoService {
 		//}
 		return null;
 	}
+
+	public void updateTodo2(Long id, Todo todo) {
+		todoMapper.updateTodoNew(id, todo);
+	}
 }

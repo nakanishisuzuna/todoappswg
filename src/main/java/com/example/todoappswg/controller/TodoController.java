@@ -43,15 +43,10 @@ public class TodoController {
 	}
 
 	@PostMapping("/todos")
-	public TodoWithoutId addTodo(@RequestBody TodoWithoutId todoWithoutId) {
-		/*try {
-			TodoWithoutId createdTodo = todoService.addTodo(todoWithoutId);
-            return ResponseEntity.status(HttpStatus.CREATED).body(createdTodo);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse("Unauthorized", e.getMessage()));
-        }*/
-
-		return todoService.addTodo(todoWithoutId);
+	public ResponseEntity<TodoWithoutId> addTodo(@RequestBody TodoWithoutId todoWithoutId) {
+		TodoWithoutId createdTodo = todoService.addTodo(todoWithoutId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdTodo);
+		//return todoService.addTodo(todoWithoutId);
 	}
 
 	//idのTodo一覧を取得
@@ -76,7 +71,7 @@ public class TodoController {
         /*try {
             boolean deleted = todoService.deleteTodoById(id);
             if (!deleted) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Not Found", "TODO not found"));
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Not Found", "Todo not found"));
             }*/
             return ResponseEntity.ok("TODO deleted");
         /*} catch (Exception e) {

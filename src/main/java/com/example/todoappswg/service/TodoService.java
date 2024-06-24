@@ -10,7 +10,10 @@ import com.example.todoappswg.mapper.TodoMapper;
 import com.example.todoappswg.model.Todo;
 import com.example.todoappswg.model.TodoWithoutId;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class TodoService {
 
 	/*private List<Todo> toDos = new ArrayList<>(
@@ -76,7 +79,7 @@ public class TodoService {
 		//for (int i = 0; i < toDos.size(); i++) {
 			//Todo to = toDos.get(i);
 			//if (todoMapper.getTodoById(id).isPresent()) {
-				//todo.setId(id);//元のIDを保存しておく
+				todo.setId(id);//元のIDを保存しておく
 				
 				todoMapper.updateTodoNew(id,todo);
 				//toDos.set(i, todo);

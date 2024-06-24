@@ -2,8 +2,6 @@ package com.example.todoappswg.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,15 +18,16 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    //@Autowired
+    //private AuthenticationManager authenticationManager;
+
 
     //private JwtUtil jwtUtil;
     //public UserController(JwtUtil jwtUtil) {
 		//this.jwtUtil = jwtUtil;
 	//}
     
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/user/register")
     public void register(@RequestBody User user) {
         userService.register(user);
@@ -36,8 +35,8 @@ public class UserController {
     
     @PostMapping("/user/login")
     public void login(@RequestBody User user) throws AuthenticationException {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+       // authenticationManager.authenticate(
+               // new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
     }
     
     //@PostMapping("/user/logout")

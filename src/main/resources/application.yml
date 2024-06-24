@@ -13,4 +13,11 @@ server:
   
 mybatis:
   configuration:
-    map-underscore-to-camel-case: true   
+    map-underscore-to-camel-case: true  
+    
+jwt:
+  secret: secret_key
+  expiration: 86400000  # 有効期限: 1日 (ミリ秒)
+
+schema:
+  type: object  

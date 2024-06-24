@@ -3,6 +3,9 @@ package com.example.todoappswg.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,48 +14,80 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.todoappswg.model.Todo;
 import com.example.todoappswg.model.TodoWithoutId;
 import com.example.todoappswg.service.TodoService;
 
+import lombok.Data;
+
 @RestController
 @RequestMapping("/api")
 public class TodoController {
+	
 	//フィールド宣言
+	@Autowired
 	private TodoService todoService;
 
 	// コンストラクタでTodoServiceを注入する
-	public TodoController(TodoService todoService) {
-		this.todoService = todoService;
-	}
+	//public TodoController(TodoService todoService) {
+		//this.todoService = todoService;
+	//}
 
 	@GetMapping("/todos")
+	@ResponseStatus(HttpStatus.OK)
 	public List<Todo> getAllTodos() {
 		return todoService.getAllTodos();
 	}
 
 	@PostMapping("/todos")
 	public TodoWithoutId addTodo(@RequestBody TodoWithoutId todoWithoutId) {
+		/*try {
+			TodoWithoutId createdTodo = todoService.addTodo(todoWithoutId);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdTodo);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse("Unauthorized", e.getMessage()));
+        }*/
+
 		return todoService.addTodo(todoWithoutId);
 	}
 
 	//idのTodo一覧を取得
 	//PathVariable:URLのパス部分に渡された値を変数として取り出して利用する機能
 	@GetMapping("/todos/{id}")
-	public Optional<Todo> getTodoById(@PathVariable Long id) {
-		return todoService.getTodoById(id);
-	}
+	public ResponseEntity<?> getTodoById(@PathVariable Long id) {
+        try {
+            Optional<Todo> todo = todoService.getTodoById(id);
+            if (todo == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Not Found", "TODO not found"));
+            }
+            return ResponseEntity.ok(todo);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse("Unauthorized", e.getMessage()));
+        }
+    }
 
+	
+	@ResponseStatus(HttpStatus.OK)
 	@DeleteMapping("/todos/{id}")
-	public void deleteTodoById(@PathVariable Long id) {
-		todoService.deleteTodoById(id);
-	}
+	public ResponseEntity<String> deleteTodoById(@PathVariable Long id) {
+        /*try {
+            boolean deleted = todoService.deleteTodoById(id);
+            if (!deleted) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Not Found", "TODO not found"));
+            }*/
+            return ResponseEntity.ok("TODO deleted");
+        /*} catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse("Unauthorized", e.getMessage()));
+        }*/
+    }
 
+	@ResponseStatus(HttpStatus.OK)
 	@PutMapping("/todos/{id}")
-	public Todo updateTodoById(@PathVariable Long id,@RequestBody Todo todo) {
-		return todoService.updateTodo(id, todo);
+	public void updateTodoById(@PathVariable Long id,@RequestBody Todo todo) {
+		todoService.updateTodo(id, todo);
 	}
 	
 	@GetMapping("/todos/filter")
@@ -68,6 +103,36 @@ public class TodoController {
             return todoService.getAllTodos();
         }
     }
+	
+	 @GetMapping("/success")
+	    @ResponseStatus(HttpStatus.OK) // 200 OKを指定
+	    public String success() {
+	        return "Success";
+	    }
+
+	    @GetMapping("/created")
+	    @ResponseStatus(HttpStatus.CREATED) // 201 Createdを指定
+	    public String created() {
+	        return "TODO Created";
+	    }
+
+	    @GetMapping("/notfound")
+	    @ResponseStatus(HttpStatus.NOT_FOUND) // 404 Not Foundを指定
+	    public String notFound() {
+	        return "TODO Not Found";
+	    }
+
+	
+	@Data
+	private static class ErrorResponse {
+        private String error;
+        private String message;
+
+        public ErrorResponse(String error, String message) {
+            this.error = error;
+            this.message = message;
+        }
+	}
 
 
 }

@@ -18,7 +18,9 @@ public interface TodoMapper {
 
     void addTodo(TodoWithoutId todoWithoutId);
 
-    void updateTodo(Todo todo);
+    //void updateTodo(Todo todo);
+    
+    void updateTodoNew(@Param("id") Long id, @Param("todo") Todo todo);
 
     void deleteTodoById(Long id);
     

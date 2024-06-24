@@ -11,12 +11,15 @@
     </select>
 
     <insert id="addTodo" parameterType="com.example.todoappswg.model.Todo">
-        INSERT INTO todo (title, status, details) VALUES (#{title}, #{status}, #{details}) 
+        INSERT INTO todo (userId,title, status, details) VALUES (#{userId},#{title}, #{status}, #{details}) 
     </insert>
 
     <update id="updateTodo" parameterType="com.example.todoappswg.model.Todo">
         UPDATE todo SET title = #{title}, status = #{status}, details = #{details} WHERE id = #{id}
-        
+    </update>
+    
+    <update id="updateTodoNew" parameterType="map">
+        UPDATE todo SET id=#{todo.id},userId=#{todo.userId},title = #{todo.title}, status = #{todo.status}, details = #{todo.details} WHERE id = #{id}
     </update>
 
     <delete id="deleteTodoById">

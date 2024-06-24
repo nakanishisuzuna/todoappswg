@@ -53,7 +53,7 @@ public class TodoService {
 		//return toDos.stream().filter(todo -> todo.getId().equals(id)).findFirst();
 	}
 
-	public Optional<Todo> deleteTodoById(Long id) {
+	public void deleteTodoById(Long id) {
 		//toDosリスト内for文
 		//equals(id)現在のtoのIDを取得・取得したIDと指定されたIDの比較
 		Optional<Todo> todoDelete = todoMapper.getTodoById(id);
@@ -63,27 +63,27 @@ public class TodoService {
 				//return Optional.of(removedTodo);
 				todoMapper.deleteTodoById(id);
 			}
-			return todoDelete;
+			//return todoDelete;
 		//}
 		//toDos.removeIf(todo -> todo.getId().equals(id));
 		//return null;
 
 	}
 
-	public Todo updateTodo(Long id, Todo todo) {
+	public void updateTodo(Long id, Todo todo) {
 		//toDosリスト内for文
 		//equals(id)現在のtoのIDを取得・取得したIDと指定されたIDの比較
 		//for (int i = 0; i < toDos.size(); i++) {
 			//Todo to = toDos.get(i);
-			if (todoMapper.getTodoById(id).isPresent()) {
-				todo.setId(id);//元のIDを保存しておく
+			//if (todoMapper.getTodoById(id).isPresent()) {
+				//todo.setId(id);//元のIDを保存しておく
 				
-				todoMapper.updateTodo(todo);
+				todoMapper.updateTodoNew(id,todo);
 				//toDos.set(i, todo);
-				return todo;
-			}
+				//return todo;
+			//}
 		//}
-		return null;
+		//return null;
 	}
 	
 	public List<Todo> getTodosByStatus(String status) {
